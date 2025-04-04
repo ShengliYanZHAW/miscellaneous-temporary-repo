@@ -1,4 +1,4 @@
-SNP_SHARED_MAKEFILE := $(if $(SNP_SHARED_MAKEFILE),$(SNP_SHARED_MAKEFILE),"/mnt/c/Users/sheng/git_repos/miscellaneous-temporary-repo/snp/shared.mk")
+SNP_SHARED_MAKEFILE := /mnt/c/Users/sheng/git_repos/miscellaneous-temporary-repo/snp/shared.mk
 
 TARGET     := bin/triangle
 SOURCES    := src/triangle.c src/read.c src/rectang.c
