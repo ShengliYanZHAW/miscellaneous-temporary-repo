@@ -68,7 +68,7 @@ int main(void)
             printf("-> Dreieck %d-%d-%d ist nicht rechtwinklig\n", a, b, c);
         printf("\n\n");
     }
-    printf("\n\nbye bye\n");
+    printf("\n\nbye bye\n\n");
 	// end students to add code
     return EXIT_SUCCESS;
 }

@@ -1,6 +1,6 @@
 # minimal required settings
-SNP_TESTLIB   := $(if $(SNP_TESTLIB),$(SNP_TESTLIB),$(wildcard ~/snp/testlib))
-SNP_DOXYFILE  := $(if $(SNP_DOXYFILE),$(SNP_DOXYFILE),$(wildcard ~/snp/Doxyfile))
+SNP_TESTLIB   := "/mnt/c/Users/sheng/git_repos/miscellaneous-temporary-repo/snp/testlib"
+SNP_DOXYFILE  := "/mnt/c/Users/sheng/git_repos/miscellaneous-temporary-repo/snp/Doxyfile"
 
 # directories to create (and remove upon cleanup)
 CREATEDIRS    := bin doc
