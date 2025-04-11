@@ -6,6 +6,7 @@
  #include <stdio.h>
  #include <string.h>
  #include <stdlib.h>
+ #include <limits.h>
  
  int person_compare(const person_t *a, const person_t *b) {
      // Compare last names
