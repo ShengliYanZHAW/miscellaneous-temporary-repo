@@ -9,26 +9,24 @@
  */
 /**
  * @file
- * @brief Lab implementation
+ * @brief Read module interface
  */
-// begin students to add code for task 4.1
-#ifndef READ_H
-#define READ_H
 
-// Return values for error conditions
-#define PARSE_ERROR -1
-#define READ_ERROR -2
+#ifndef READ_H_
+#define READ_H_
 
 /**
- * Reads an unsigned integer from stdin (via byte stream).
- * First reads a line and then converts it to an integer.
- * The read line may only contain one number (with optional spaces before/after).
- *
- * @param maxResult Maximum allowed value for the result
- * @return The converted number, or PARSE_ERROR if no number or too large,
- *         or READ_ERROR if there was an error reading
+ * @brief Error codes for getInt function
+ */
+#define PARSE_ERROR -1
+#define READ_ERROR  -2
+
+/**
+ * @brief Reads an unsigned integer from stdin
+ * @param[in] maxResult Maximum allowed value for the result
+ * @returns Returns the converted integer value, or PARSE_ERROR if not a number or too large, 
+ *          or READ_ERROR if there was an error reading from stdin
  */
 int getInt(int maxResult);
 
-#endif // READ_H
-// end students to add code
+#endif /* READ_H_ */

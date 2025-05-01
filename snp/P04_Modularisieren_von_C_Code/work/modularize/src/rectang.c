@@ -9,16 +9,23 @@
  */
 /**
  * @file
- * @brief Lab implementation
+ * @brief Rectangle module implementation
  */
-// begin students to add code for task 4.1
+
 #include "rectang.h"
 
+/**
+ * @brief Determines if a triangle is right-angled
+ * @param[in] a First side of the triangle
+ * @param[in] b Second side of the triangle
+ * @param[in] c Third side of the triangle
+ * @returns Returns 1 (true) if right-angled, 0 (false) if not
+ */
 int Rectangular(int a, int b, int c)
 {
-    int aS = a*a;
-    int bS = b*b;
-    int cS = c*c;
+    int aS = a * a;
+    int bS = b * b;
+    int cS = c * c;
     
     int isRightAngled;
     if ((a == 0) && (b == 0) && (c == 0))
@@ -34,4 +41,3 @@ int Rectangular(int a, int b, int c)
     
     return isRightAngled;
 }
-// end students to add code

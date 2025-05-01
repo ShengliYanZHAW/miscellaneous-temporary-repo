@@ -9,68 +9,72 @@
  */
 /**
  * @file
- * @brief Lab implementation
+ * @brief Read module implementation
  */
-// begin students to add code for task 4.1
-#include "read.h"
-#include <stdio.h>
 
+#include <stdio.h>
+#include "read.h"
+
+/**
+ * @brief Reads an unsigned integer from stdin
+ * @param[in] maxResult Maximum allowed value for the result
+ * @returns Returns the converted integer value, or PARSE_ERROR if not a number or too large, 
+ *          or READ_ERROR if there was an error reading from stdin
+ */
 int getInt(int maxResult)
 {
-    // End of input constants
-    #define EOF_VALUE -1
-    #define EOL 10  // Line feed
+    // end of input
+    const int EOF_CHAR = -1; // end of file
+    const int EOL_CHAR = 10; // end of line (newline)
     
-    // ASCII codes
-    #define ASCII_SPACE 32  // ' '
-    #define ASCII_DIGIT_0 48 // '0'
-    #define ASCII_DIGIT_9 57 // '9'
+    // ASCII Codes
+    const int ASCII_SPACE   = 32; // ' '
+    const int ASCII_DIGIT_0 = 48; // '0'
+    const int ASCII_DIGIT_9 = 57; // '9'
     
-    // Buffer constants
-    #define NO_POS -1
-    #define BUFFERSIZE 10
-    
-    // Conversion buffer
+    // conversion buffer
+    const int NO_POS = -1;
+    const int BUFFERSIZE = 10;
     char buffer[BUFFERSIZE];
     
     int result = 0;
     
-    // Read line: up to EOL or EOF
+    // read line: up to EOL or EOF (i.e. error while reading)
     int bytes = 0;
     int input = getchar();
-    while ((input != EOL) && (input != EOF)) { // Read whole line
-        if (bytes < BUFFERSIZE) { // Only buffer first n characters
+    while ((input != EOL_CHAR) && (input != EOF_CHAR)) { // read whole line
+        if (bytes < BUFFERSIZE) { // only buffer first n characters
             buffer[bytes] = (char)input;
             bytes++;
         } else {
-            result = PARSE_ERROR; // Exceed buffer size, continue reading line
+            result = PARSE_ERROR; // exceed buffer size, continue read line
         }
         input = getchar();
     }
-    if (input == EOF) {
+    if (input == EOF_CHAR) {
         result = READ_ERROR;
     }
     
-    // Check for numbers: skip leading and trailing spaces
+    // check for numbers: skip leading and trailing spaces
+    // (i.e. this includes all control chars below the space ASCII code)
     int pos = 0;
-    while ((pos < bytes) && (buffer[pos] <= ASCII_SPACE)) pos++; // Skip spaces
+    while ((pos < bytes) && (buffer[pos] <= ASCII_SPACE)) pos++; // skip spaces
     int posOfFirstDigit = pos;
     int posOfLastDigit = NO_POS;
     while ((pos < bytes) 
            && (buffer[pos] >= ASCII_DIGIT_0) 
-           && (buffer[pos] <= ASCII_DIGIT_9)) 
-    {
+           && (buffer[pos] <= ASCII_DIGIT_9)) {
         posOfLastDigit = pos;
         pos++;
     }
-    while ((pos < bytes) && (buffer[pos] <= ASCII_SPACE)) pos++; // Skip spaces
+    while ((pos < bytes) && (buffer[pos] <= ASCII_SPACE)) pos++; // skip spaces
     
-    // Produce return value
+    // produce return value
     if (result != 0) {
-        // Previously detected read or parse error
+        // previously detected read or parse error given
     } else if ((pos != bytes) || (posOfLastDigit == NO_POS)) {
         result = PARSE_ERROR;
-    } else { // Convert number
+    } else { // convert number
         for (int i = posOfFirstDigit; i <= posOfLastDigit; i++) {
             result = result * 10 + (buffer[i] - ASCII_DIGIT_0);
             if (result > maxResult) {
@@ -79,7 +83,5 @@ int getInt(int maxResult)
             }
         }
     }
-    
     return result;
 }
-// end students to add code
