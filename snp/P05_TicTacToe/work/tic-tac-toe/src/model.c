@@ -29,11 +29,8 @@ static void set_state(model_t *instance, model_pos_t pos, model_state_t state)
     // set the field of the board to the new state
     // BEGIN-STUDENTS-TO-ADD-CODE
 
+    instance->board[pos.row][pos.col] = state;
 
-    
-
-
-    
     // END-STUDENTS-TO-ADD-CODE
 }
 
@@ -52,10 +49,11 @@ void model_init(model_t *instance)
     // set all fields of the board to model_state_none
     // BEGIN-STUDENTS-TO-ADD-CODE
 
-
-
-
-
+    for (size_t row = 0; row < MODEL_SIZE; row++) {
+        for (size_t col = 0; col < MODEL_SIZE; col++) {
+            instance->board[row][col] = model_state_none;
+        }
+    }
 
     // END-STUDENTS-TO-ADD-CODE
 }
@@ -70,9 +68,7 @@ model_state_t model_get_state(model_t *instance, model_pos_t pos)
     // replace the stub implementation my access to the field at the given position.
     // BEGIN-STUDENTS-TO-ADD-CODE
 
-
-    return model_state_none; // stub 
-
+    return instance->board[pos.row][pos.col];
 
     // END-STUDENTS-TO-ADD-CODE
 }
@@ -140,12 +136,13 @@ int model_can_move(model_t *instance)
         // scan all fields: return 1 with first field which equals model_state_none
         // BEGIN-STUDENTS-TO-ADD-CODE
 
-
-
-
-
-
-
+        for (size_t row = 0; row < MODEL_SIZE; row++) {
+            for (size_t col = 0; col < MODEL_SIZE; col++) {
+                if (instance->board[row][col] == model_state_none) {
+                    return 1;
+                }
+            }
+        }
 
         // END-STUDENTS-TO-ADD-CODE
     }

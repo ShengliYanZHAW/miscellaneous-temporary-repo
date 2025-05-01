@@ -9,21 +9,19 @@
  */
 /**
  * @file
- * @brief Lab implementation
+ * @brief Rectangle module interface
  */
-// begin students to add code for task 4.1
-#ifndef RECTANG_H
-#define RECTANG_H
+
+#ifndef RECTANG_H_
+#define RECTANG_H_
 
 /**
- * Determines if a triangle is right-angled.
- *
- * @param a First side length
- * @param b Second side length
- * @param c Third side length
- * @return 1 if right-angled, 0 otherwise
+ * @brief Determines if a triangle is right-angled
+ * @param[in] a First side of the triangle
+ * @param[in] b Second side of the triangle
+ * @param[in] c Third side of the triangle
+ * @returns Returns 1 (true) if right-angled, 0 (false) if not
  */
 int Rectangular(int a, int b, int c);
 
-#endif // RECTANG_H
-// end students to add code
+#endif /* RECTANG_H_ */

@@ -50,6 +50,10 @@ void *ThreadF(void *letter) {
     }
     printf("\n");
     fflush(stdout);
+    
+    // Add infinite loop for Task 2
+    while(1) { }
+    
     pthread_exit(0);
 }
 
