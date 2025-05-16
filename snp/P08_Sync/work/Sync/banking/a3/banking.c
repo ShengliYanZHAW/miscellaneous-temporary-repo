@@ -74,8 +74,27 @@ void deposit(int branchNr, int accountNr, long int value) {
 }
 
 void transfer(int fromB, int toB, int accountNr, long int value) {
-    int money = withdraw(fromB, accountNr, value);
-    deposit(toB, accountNr, money);
+    long int money = 0;
+    // lock all branches and accounts to ensure global consistency
+    for (int i = 0; i < nBranches; i++) {
+        pthread_mutex_lock(&bank[i].branchLock);
+        for (int j = 0; j < nAccounts; j++) {
+            pthread_mutex_lock(&bank[i].accounts[j].acntLock);
+        }
+    }
+    // perform transfer directly
+    if (bank[fromB].accounts[accountNr].balance >= value) {
+        bank[fromB].accounts[accountNr].balance -= value;
+        money = value;
+    }
+    bank[toB].accounts[accountNr].balance += money;
+    // release all locks
+    for (int i = nBranches - 1; i >= 0; i--) {
+        for (int j = nAccounts - 1; j >= 0; j--) {
+            pthread_mutex_unlock(&bank[i].accounts[j].acntLock);
+        }
+        pthread_mutex_unlock(&bank[i].branchLock);
+    }
 }
 
 void checkAssets(void) {

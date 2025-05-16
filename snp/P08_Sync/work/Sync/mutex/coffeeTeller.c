@@ -29,6 +29,8 @@ void *coffeeTeller(void* data) {
     
     i = 0;
     while (i < ITERATIONS) {
+        // lock around consistency check
+        pthread_mutex_lock(&cD->lock);
         if (cD->coinCount != cD->selCount1 + cD->selCount2) {
             printf("error c = %5d  s1 =%6d   s2 =%6d   diff: %4d\ti = %d\n", 
                    cD->coinCount, cD->selCount1, cD->selCount2, 
@@ -37,7 +39,17 @@ void *coffeeTeller(void* data) {
             cD->coinCount = 0;
             cD->selCount1 = cD->selCount2 = 0;
         }
+        pthread_mutex_unlock(&cD->lock);
+
         if (i%1000000 == 0) printf("working %d\n", i);
+        printf("teller (%d): waiting for coin\n", i);
+        // lock critical section
+        pthread_mutex_lock(&cD->lock);
+        cD->coinCount++;
+        printf("       (%d): got coin, total coins = %d\n", i, cD->coinCount);  
+        cD->selCount1++; // assume single coffee type increments selCount1
+        pthread_mutex_unlock(&cD->lock);
+        printf("       (%d): dispense coffee\n", i); 
         i++;
     }
     pthread_exit(0);
