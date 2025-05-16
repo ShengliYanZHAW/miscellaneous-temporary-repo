@@ -79,8 +79,48 @@ void server_terminate_cmd(int commSock)
 
 int main(int argc, char* argv[])
 {
-	// BEGIN-STUDENTS-TO-ADD-CODE
-
-	// END-STUDENTS-TO-ADD-CODE
+    if(argc != 3) {
+        fprintf(stderr, "Usage: %s <Server> <Port>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+    const char* serverName = argv[1];
+    const char* port = argv[2];
+    char choice;
+    while(1) {
+        printf("Enter command (I)nsert, (R)emove, (S)how, (C)lear, (T)erminate, (Q)uit: ");
+        if(scanf(" %c", &choice) != 1) break;
+        choice = toupper(choice);
+        if(choice == 'Q') break;
+        int commSock = client_connect(serverName, port);
+        switch(choice) {
+            case 'I':
+            case 'R': {
+                person_t person;
+                if(!person_read(&person)) {
+                    printf("Invalid input\n");
+                } else {
+                    int retval = person_cmd(commSock, choice, &person);
+                    if(retval == 0) printf("Ok\n");
+                    else if(retval == 1) printf("Not found\n");
+                    else if(retval == 2) printf("Invalid data\n");
+                }
+            } break;
+            case 'S':
+                list_show_cmd(commSock);
+                break;
+            case 'C':
+                list_clear_cmd(commSock);
+                printf("Cleared\n");
+                break;
+            case 'T':
+                server_terminate_cmd(commSock);
+                printf("Server terminating\n");
+                break;
+            default:
+                printf("Unknown command\n");
+                break;
+        }
+        close(commSock);
+    }
     return EXIT_SUCCESS;
 }

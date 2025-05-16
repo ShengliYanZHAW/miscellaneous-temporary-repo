@@ -152,8 +152,22 @@ void handleRequestPers(char* requestBuffer, int requestLen)
  */
 int main(int argc, char* argv[])
 {
-	// BEGIN-STUDENTS-TO-ADD-CODE
-
-	// END-STUDENTS-TO-ADD-CODE
+    if(argc != 2) {
+        fprintf(stderr, "Usage: %s <Port>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+    const char* port = argv[1];
+    list_init();
+    load_person_list();
+    server_init((char*)port);
+    while(!shutdown) {
+        char requestBuffer[MAX_LEN];
+        int len = getRequest(requestBuffer, MAX_LEN);
+        if(len > 0) {
+            handleRequestPers(requestBuffer, len);
+            server_close_connection();
+        }
+    }
+    store_person_list();
     return EXIT_SUCCESS;
 }

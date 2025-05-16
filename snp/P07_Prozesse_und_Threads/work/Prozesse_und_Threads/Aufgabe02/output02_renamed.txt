@@ -1,0 +1,19 @@
+
+execl not successful: No such file or directory
+
+
+i vor fork: 5
+
+
+. . . . . und wer bin ich ?
+
+
+
+i vor fork: 5
+
+
+... wir sind die Eltern 404 mit i=4 und Kind 405,
+    unsere Eltern sind 388
+
+. . . . . und wer bin ich ?
+

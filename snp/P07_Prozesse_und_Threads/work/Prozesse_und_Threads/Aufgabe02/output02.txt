@@ -1,0 +1,12 @@
+
+... ich bin das Kind 402 mit i=6, meine Eltern sind 401 
+
+
+i vor fork: 5
+
+
+... wir sind die Eltern 401 mit i=4 und Kind 402,
+    unsere Eltern sind 388
+
+. . . . . und wer bin ich ?
+

@@ -1,0 +1,4 @@
+
+*** I am the child having job nr. 0 ***
+
+Child exits with status    0

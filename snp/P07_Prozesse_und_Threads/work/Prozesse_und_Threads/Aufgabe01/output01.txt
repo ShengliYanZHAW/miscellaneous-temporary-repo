@@ -1,0 +1,19 @@
+
+
+i vor fork: 5
+
+
+... ich bin das Kind 399 mit i=6, meine Eltern sind 398 
+
+. . . . . und wer bin ich ?
+
+
+
+i vor fork: 5
+
+
+... wir sind die Eltern 398 mit i=4 und Kind 399,
+    unsere Eltern sind 388
+
+. . . . . und wer bin ich ?
+

@@ -59,18 +59,23 @@ void deleteBank(void) {
 }
 
 long int withdraw(int branchNr, int accountNr, long int value) {
-    int rv, tmp;
-    rv = 0;
-    tmp = Bank[branchNr].accounts[accountNr].balance - value;
+    long int rv = 0;
+    // lock the specific account
+    pthread_mutex_lock(&Bank[branchNr].accounts[accountNr].acntLock);
+    long int tmp = Bank[branchNr].accounts[accountNr].balance - value;
     if (tmp >= 0) {
         Bank[branchNr].accounts[accountNr].balance = tmp;
         rv = value;
     }
-    return rv;   
+    pthread_mutex_unlock(&Bank[branchNr].accounts[accountNr].acntLock);
+    return rv;
 }
 
 void deposit(int branchNr, int accountNr, long int value) {
+    // lock the specific account
+    pthread_mutex_lock(&Bank[branchNr].accounts[accountNr].acntLock);
     Bank[branchNr].accounts[accountNr].balance += value;
+    pthread_mutex_unlock(&Bank[branchNr].accounts[accountNr].acntLock);
 }
 
 void transfer(int fromB, int toB, int accountNr, long int value) {

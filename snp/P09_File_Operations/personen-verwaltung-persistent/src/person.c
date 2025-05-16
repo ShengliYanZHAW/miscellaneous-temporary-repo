@@ -1,6 +1,7 @@
 #include <assert.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "person.h"
 
@@ -30,17 +31,29 @@ static const int max_len = 128; //!!!könnte man schöner lösen, scia
 
 int person_to_csv_string(person_t* person, char* s)
 {
-	// BEGIN-STUDENTS-TO-ADD-CODE
-	
-	// END-STUDENTS-TO-ADD-CODE
+    // serialize person fields into CSV string
+    return snprintf(s, max_len, "%s,%s,%u", person->name, person->first_name, person->age);
 }
-
 
 void person_from_csv_string(person_t* person, char* s)
 {
-	// BEGIN-STUDENTS-TO-ADD-CODE
-
-	// END-STUDENTS-TO-ADD-CODE
+    // parse CSV string into person fields
+    char *token;
+    char *rest = s;
+    token = strsep(&rest, ",");
+    if (token) {
+        strncpy(person->name, token, NAME_LEN-1);
+        person->name[NAME_LEN-1] = '\0';
+    }
+    token = strsep(&rest, ",");
+    if (token) {
+        strncpy(person->first_name, token, NAME_LEN-1);
+        person->first_name[NAME_LEN-1] = '\0';
+    }
+    token = strsep(&rest, ",");
+    if (token) {
+        person->age = (unsigned int)atoi(token);
+    }
 }
 
 
