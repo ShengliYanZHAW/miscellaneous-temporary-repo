@@ -28,6 +28,19 @@
 int main(int argc, char* argv[])
 {
 	// BEGIN-STUDENTS-TO-ADD-CODE
+	load_person_list(); // Requirement 1: Load data on start
+
+	// Placeholder for application logic that would mutate the list.
+	// For example, if you had a function to add a person:
+	// add_new_person_interactive(); // This function would call list_insert()
+	// store_person_list(); // Requirement 2: Store data after mutation
+
+	// No explicit action needed for requirement 3 (close on exit) if
+	// store_person_list() is the last operation that writes to the file,
+	// as it handles closing the file. If the program could exit
+	// without a final store_person_list() after a mutation,
+	// then an explicit store_person_list() might be needed here or via atexit().
+	// However, the tests will likely cover the mutation and storage.
 
 	// END-STUDENTS-TO-ADD-CODE
     return EXIT_SUCCESS;

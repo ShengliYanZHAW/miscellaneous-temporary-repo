@@ -96,4 +96,8 @@ person_t* list_getNext(void);
 int list_size(void);
 
 
+// Persistence operations (declare here so test code sees them)
+void store_person_list(void);
+void load_person_list(void);
+
 #endif // _LIST_H_

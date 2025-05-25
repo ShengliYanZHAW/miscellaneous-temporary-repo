@@ -16,11 +16,12 @@ doit:
 coffeeTeller:	$(FILES)
 		$(CMP) $(CMPFLAGS) $(FILES) $(LIB) -o $(EXENAME1)
 
-.c.o:		$(INCLS)
-		$(CMP) -c $(CMPFLAGS) $<
+# use pattern rules instead of suffix rules to allow header dependencies
+%.o: %.c $(INCLS)
+	$(CMP) -c $(CMPFLAGS) $<
 
-.cc.o:		$(INCLS)
-		$(CMP) -c $(CMPFLAGS) $<
+%.o: %.cc $(INCLS)
+	$(CMP) -c $(CMPFLAGS) $<
 
 all:
 		@make clean

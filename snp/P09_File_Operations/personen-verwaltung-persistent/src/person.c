@@ -37,22 +37,18 @@ int person_to_csv_string(person_t* person, char* s)
 
 void person_from_csv_string(person_t* person, char* s)
 {
-    // parse CSV string into person fields
-    char *token;
-    char *rest = s;
-    token = strsep(&rest, ",");
-    if (token) {
-        strncpy(person->name, token, NAME_LEN-1);
+    // parse CSV string with sscanf (fields separated by commas)
+    unsigned int age = 0;
+    // read up to NAME_LEN-1 chars for name and first_name, then age
+    if (sscanf(s, "%19[^,],%19[^,],%u", person->name, person->first_name, &age) == 3) {
         person->name[NAME_LEN-1] = '\0';
-    }
-    token = strsep(&rest, ",");
-    if (token) {
-        strncpy(person->first_name, token, NAME_LEN-1);
         person->first_name[NAME_LEN-1] = '\0';
-    }
-    token = strsep(&rest, ",");
-    if (token) {
-        person->age = (unsigned int)atoi(token);
+        person->age = age;
+    } else {
+        // if parsing fails, zero the person
+        person->name[0] = '\0';
+        person->first_name[0] = '\0';
+        person->age = 0;
     }
 }
 

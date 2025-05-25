@@ -40,7 +40,7 @@ int main(void) {
         sem_wait(coin);
         printf("       (%d): got coin\n", i);
         sem_post(ready);
-        sem_wait(ready); // wait for customer to be ready
+        sem_wait(coffee); // wait for customer to select coffee
         printf("       (%d): dispense coffee\n", i);
         i++;
     }
